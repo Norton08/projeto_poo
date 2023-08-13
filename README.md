@@ -18,11 +18,13 @@
 
 ### Sobre
 Trabalho final da Disciplina de POO.
-Uma "Plataforma" de pedidos C2B que gerencia cada parte dos pedidos assegurando a completude deles.
+Uma "Plataforma" lista que comércios .
 
 ### Tabela de Conteudo
 
 ### Pré Requisitos
+lista com CRUD básico e acesso único de listagem de Comercios.
+Separada pelos tipos, alimentício, Serviços e Fabril
 
 ### Configurações
 
