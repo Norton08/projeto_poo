@@ -24,12 +24,12 @@ Uma "Plataforma" lista que comércios .
 
 ### Pré Requisitos
 lista com CRUD básico e acesso único de listagem de Comercios.
-Separada pelos tipos, alimentício, Serviços e Fabril
+Separada pelos tipos, alimentício, Serviços e Fabrica
 
 ### Configurações
 
 ### Tecnologias
-Java 20 e IDE IntelliJ para Estudantes
+Java JDK 20 e IDE IntelliJ para Estudantes
 
 ### Autores
 Norton

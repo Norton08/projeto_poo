@@ -4,9 +4,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.swing.JOptionPane;
 
 public class Arquivo {
-    public static String Read(String Caminho){
+    public static String ler(String Caminho){
         String conteudo = "";
         try {
             FileReader arq = new FileReader(Caminho);
@@ -21,16 +22,16 @@ public class Arquivo {
                 arq.close();
                 return conteudo;
             } catch (IOException ex) {
-                System.out.println("Erro: Não foi possível ler o arquivo!");
+                JOptionPane.showMessageDialog(null, "Erro: Não foi possível ler o arquivo!");
                 return "";
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("Erro: Arquivo não encontrado!");
+            JOptionPane.showMessageDialog(null, "Erro: Arquivo não encontrado!");
             return "";
         }
     }
 
-    public static boolean Write(String Caminho,String Texto){
+    public static boolean escrever(String Caminho,String Texto){
         try {
             FileWriter arq = new FileWriter(Caminho);
             PrintWriter gravarArq = new PrintWriter(arq);
@@ -42,4 +43,53 @@ public class Arquivo {
             return false;
         }
     }
+
+    public static String Atualizar(String Caminho, String Texto){
+        String conteudo = "";
+        try {
+            FileReader arq = new FileReader(Caminho);
+            BufferedReader lerArq = new BufferedReader(arq);
+            String linha="";
+            try {
+                linha = lerArq.readLine();
+                while(linha!=null){
+                    conteudo += linha+"\n";
+                    linha = lerArq.readLine();
+                }
+                arq.close();
+                return conteudo;
+            } catch (IOException ex) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Erro: Não foi possível ler o arquivo!");
+                return "";
+            }
+        } catch (FileNotFoundException ex) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Erro: Arquivo não encontrado!");
+            return "";
+        }
+    }
+
+    public static String Delete(String Caminho, String Texto){
+        String conteudo = "";
+        try {
+            FileReader arq = new FileReader(Caminho);
+            BufferedReader lerArq = new BufferedReader(arq);
+            String linha="";
+            try {
+                linha = lerArq.readLine();
+                while(linha!=null){
+                    conteudo += linha+"\n";
+                    linha = lerArq.readLine();
+                }
+                arq.close();
+                return conteudo;
+            } catch (IOException ex) {
+                javax.swing.JOptionPane.showMessageDialog(null, "Erro: Não foi possível ler o arquivo!");
+                return "";
+            }
+        } catch (FileNotFoundException ex) {
+            javax.swing.JOptionPane.showMessageDialog(null, "Erro: Arquivo não encontrado!");
+            return "";
+        }
+    }
+
 }

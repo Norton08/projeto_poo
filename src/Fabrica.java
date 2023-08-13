@@ -1,8 +1,8 @@
-public class Fabril extends Comercio{
+public class Fabrica extends Comercio{
     private String tipoProduto;
     private String setor;
 
-    public Fabril(String nome, String endereco, String telefone, String horarioFuncionamento, String tipoProduto, String setor) {
+    public Fabrica(String nome, String endereco, String telefone, String horarioFuncionamento, String tipoProduto, String setor) {
         super(nome,  endereco,  telefone,  horarioFuncionamento);
         this.tipoProduto = tipoProduto;
         this.setor = setor;
