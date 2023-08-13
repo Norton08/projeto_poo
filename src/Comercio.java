@@ -1,4 +1,6 @@
-public abstract class Comercio {
+import java.io.Serializable;
+
+public abstract class Comercio implements Serializable {
     private String nome;
     private String endereco;
     private String telefone;
@@ -41,10 +43,6 @@ public abstract class Comercio {
 
     public void setHorarioFuncionamento(String horarioFuncionamento) {
         this.horarioFuncionamento = horarioFuncionamento;
-    }
-
-    public String toString() {
-        return "Nome: " + this.nome + "\nEndereço: " + this.endereco + "\nTelefone: " + this.telefone + "\nHorário de Funcionamento: " + this.horarioFuncionamento;
     }
 
 }

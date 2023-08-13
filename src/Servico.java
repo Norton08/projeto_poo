@@ -19,6 +19,13 @@ public class Servico extends Comercio{
     }
 
     public String toString() {
-        return super.toString() + "\nTipo de Serviço: " + this.tipoServico + "\n";
+        return "--------------------------" +
+                    "Tipo: Serviço"  +
+                "--------------------------\n" +
+                "Nome: " + this.getNome() +  "\n" +
+                "Endereço: " + this.getEndereco() + "\n" +
+                "Telefone: " + this.getTelefone() + "\n" +
+                "Horário de Funcionamento: " + this.getHorarioFuncionamento() + "\n" +
+                "Tipo de Produto: " + this.tipoServico;
     }
 }

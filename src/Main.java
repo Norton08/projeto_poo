@@ -83,14 +83,21 @@ public class Main {
 
         do {
             menu = "Entrada de Dados\n" +
-                    "Opções:\n" +
-                    "1. Entrar Comércios\n" +
-                    "2. Exibir Comércios\n" +
-                    "3. Limpar Comércios\n" +
-                    "4. Gravar Comércios\n" +
-                    "5. Recuperar Comércios\n" +
-                    "9. Sair";
+                    "Opções:\n\n" +
+                    "1. INCLUIR \n" +
+                    "2. LISTAR \n" +
+                    "3. EXCLUIR\n" +
+                    "4. SALVAR \n" +
+                    "5. RECUPERAR ARQUIVO \n" +
+                    "6. ALTERAR \n" +
+                    "7. CONSULTAR \n" +
+                    "9. SAIR";
             entrada = JOptionPane.showInputDialog (menu + "\n\n");
+
+            if (entrada == null){
+                entrada = "9";
+                opc1 = Integer.parseInt(entrada);
+            }
 
             while (!numeroInteiroValido(entrada)) {
                 entrada = JOptionPane.showInputDialog(null, menu +
@@ -105,8 +112,8 @@ public class Main {
                             "1. Alimentício\n" +
                             "2. Serviço\n" +
                             "3. Fábrica\n";
-
                     entrada = JOptionPane.showInputDialog (menu + "\n\n");
+
                     while (!numeroInteiroValido(entrada)) {
                         entrada = JOptionPane.showInputDialog(null, menu +
                                 "\n\nEntrada inválida! Digite um número inteiro.");
@@ -114,7 +121,7 @@ public class Main {
                     opc2 = Integer.parseInt(entrada);
 
                     switch (opc2){
-                        case 1: comercios.add((Comercio)leComercio(opc2));
+                        case 1: comercios.add((Comercio) leComercio(opc2));
                             break;
                         case 2: comercios.add((Comercio) leComercio(opc2));
                             break;
@@ -150,7 +157,8 @@ public class Main {
                         break;
                     }
                     salvaComercio(comercios);
-                    JOptionPane.showMessageDialog(null,"Dados SALVOS com sucesso!");
+                    JOptionPane.showMessageDialog
+                            (null,"Dados SALVOS com sucesso!");
                     break;
                 case 5: // Recupera Dados
                     comercios = recuperaComercios();

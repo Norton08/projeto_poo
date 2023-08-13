@@ -1,4 +1,5 @@
-public class Fabrica extends Comercio{
+
+public class Fabrica extends Comercio {
     private static int contador = 0;
     private int codigo;
     private String tipoProduto;
@@ -28,6 +29,15 @@ public class Fabrica extends Comercio{
     }
 
     public String toString() {
-        return super.toString() + "\nTipo de Produto: " + this.tipoProduto + "\nTipo de Serviço: " + this.setor + "\n";
+        return  "--------------------------" +
+                      "Tipo: Fábrica"  +
+                "--------------------------\n" +
+                "Código: " + this.codigo + "\n" +
+                "Nome: " + this.getNome() +  "\n" +
+                "Endereço: " + this.getEndereco() + "\n" +
+                "Telefone: " + this.getTelefone() + "\n" +
+                "Horário de Funcionamento: " + this.getHorarioFuncionamento() + "\n" +
+                "Tipo de Produto: " + this.tipoProduto + "\n" +
+                "Setor: " + this.setor + "\n";
     }
 }

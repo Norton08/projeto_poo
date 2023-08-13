@@ -1,7 +1,5 @@
-import java.io.Serializable;
 
-public class Alimenticio extends Comercio
-                         implements Serializable {
+public class Alimenticio extends Comercio {
 
     private static int contador = 0;
     private int codigo;
@@ -22,6 +20,13 @@ public class Alimenticio extends Comercio
     }
 
     public String toString() {
-        return super.toString() + "\nTipo de Comida: " + this.tipoComida + "\n";
+        return "--------------------------" +
+                    "Tipo: Alimentício"  +
+                "--------------------------\n" +
+                "Nome: " + this.getNome() +  "\n" +
+                "Endereço: " + this.getEndereco() + "\n" +
+                "Telefone: " + this.getTelefone() + "\n" +
+                "Horário de Funcionamento: " + this.getHorarioFuncionamento() + "\n" +
+                "Tipo de Produto: " + this.tipoComida + "\n";
     }
 }
