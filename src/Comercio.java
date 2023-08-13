@@ -1,16 +1,24 @@
 import java.io.Serializable;
 
 public abstract class Comercio implements Serializable {
+
+    private static int contador = 0;
+    private int codigo;
     private String nome;
     private String endereco;
     private String telefone;
     private String horarioFuncionamento;
 
     public Comercio(String nome, String endereco, String telefone, String horarioFuncionamento) {
+        this.codigo = ++contador;
         this.nome = nome;
         this.endereco = endereco;
         this.telefone = telefone;
         this.horarioFuncionamento = horarioFuncionamento;
+    }
+
+    public int getCodigo() {
+        return codigo;
     }
 
     public String getNome() {

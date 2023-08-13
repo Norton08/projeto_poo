@@ -5,13 +5,18 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main (String [] args){
+
+
+        Alimenticio alimenticio = new Alimenticio("MC Donald's", "Rua 1", "998877665", "0:00-23:59", "Hamburger");
+        Servico servico = new Servico("Pet Shop", "Rua 2", "987766554", "7:00-20:00", "Tosa e cuidado de pets");
+        Fabrica fabrica = new Fabrica("Mabel", "Rua 3", "986655443", "9:00-19:00", "Biscoitos&Panificados", "Industrial");
+        System.out.println(alimenticio);
+        System.out.println(servico);
+        System.out.println(fabrica);
+
+
         Main main = new Main();
         main.menuComercios();
-    }
-
-
-    public void mostraComercio(String dados){
-        JOptionPane.showMessageDialog(null,"COMÉRCIO\n-------\n +" +dados);
     }
 
     public void salvaComercio(ArrayList<Comercio> comercios){
@@ -24,6 +29,7 @@ public class Main {
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Impossível criar arquivo!");
             ex.printStackTrace();
+            throw new RuntimeException("File can't be created!");
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {  //Close the ObjectOutputStream
@@ -60,6 +66,7 @@ public class Main {
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null,"Arquivo com produtos NÃO existe!");
             ex.printStackTrace();
+            throw new RuntimeException("File doesn't exists!");
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {  //Close the ObjectInputStream
@@ -138,7 +145,7 @@ public class Main {
                         break;
                     }
                     String dados = "";
-                    for (int i=0; i < comercios.size(); i++)	{
+                    for (int i=0; i < comercios.size(); i++) {
                         dados += comercios.get(i).toString() + "\n";
                     }
                     JOptionPane.showMessageDialog(null,dados);
