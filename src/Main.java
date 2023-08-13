@@ -1,63 +1,221 @@
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
-        ArrayList<Comercio> comercios = new ArrayList<Comercio>();
-        //read "comercios.txt" if exists else create "comercios.txt"
-        try { Arquivo.ler("C:\\GITHUB\\projeto_poo\\src\\comercios.txt"); }
-        catch (Exception e) { Arquivo.escrever("C:\\GITHUB\\projeto_poo\\src\\comercios.txt", ""); }
-        //sistema de listagem de comercios sendo comercio dos tipos Alimenticio, Serviços e Fabil com CRUD completo
-        JMenuItem cadastrar = new JMenuItem("Cadastrar");
-        JMenuItem listar = new JMenuItem("Listar");
-        JMenuItem atualizar = new JMenuItem("Atualizar");
-        JMenuItem excluir = new JMenuItem("Excluir");
-        JMenuItem sair = new JMenuItem("Sair");
-        JMenu menu = new JMenu("Menu");
-        menu.add(cadastrar);
-        menu.add(listar);
-        menu.add(atualizar);
-        menu.add(excluir);
-        menu.add(sair);
-        JMenuBar barra = new JMenuBar();
-        barra.add(menu);
-        JFrame janela = new JFrame("Comércios");
-        janela.setJMenuBar(barra);
-        janela.setSize(250, 250);
-        janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        janela.setVisible(true);
-        cadastrar.addActionListener(e -> {
-            String[] tipos = {"Alimentício", "Serviço", "Fábrica"};
-            String tipo = (String) JOptionPane.showInputDialog(null, "Selecione o tipo de comércio", "Tipo de comércio", JOptionPane.QUESTION_MESSAGE, null, tipos, tipos[0]);
-            if (tipo == "Alimentício") {
-                String nome = JOptionPane.showInputDialog("Nome do comércio");
-                String endereco = JOptionPane.showInputDialog("Endereço do comércio");
-                String telefone = JOptionPane.showInputDialog("Telefone do comércio");
-                String horarioFuncionamento = JOptionPane.showInputDialog("Horário de funcionamento do comércio");
-                String tipoComida = JOptionPane.showInputDialog("Tipo de comida do comércio");
-                Alimenticio comercio = new Alimenticio(nome, endereco, telefone, horarioFuncionamento, tipoComida);
-                comercios.add(comercio);
-                Arquivo.escrever("C:\\GITHUB\\projeto_poo\\src\\comercios.txt", comercio.toString());
-            } else if (tipo == "Serviço") {
-                String nome = JOptionPane.showInputDialog("Nome do comércio");
-                String endereco = JOptionPane.showInputDialog("Endereço do comércio");
-                String telefone = JOptionPane.showInputDialog("Telefone do comércio");
-                String horarioFuncionamento = JOptionPane.showInputDialog("Horário de funcionamento do comércio");
-                String tipoServico = JOptionPane.showInputDialog("Tipo de serviço do comércio");
-                Servico comercio = new Servico(nome, endereco, telefone, horarioFuncionamento, tipoServico);
-                comercios.add(comercio);
-                Arquivo.escrever("C:\\GITHUB\\projeto_poo\\src\\comercios.txt", comercio.toString());
-            } else if (tipo == "Fábrica") {
-                String nome = JOptionPane.showInputDialog("Nome do comércio");
-                String endereco = JOptionPane.showInputDialog("Endereço do comércio");
-                String telefone = JOptionPane.showInputDialog("Telefone do comércio");
-                String horarioFuncionamento = JOptionPane.showInputDialog("Horário de funcionamento do comércio");
-                String tipoProduto = JOptionPane.showInputDialog("Tipo de produto do comércio");
-                String setor = JOptionPane.showInputDialog("Setor do comércio");
-                Fabrica comercio = new Fabrica(nome, endereco, telefone, horarioFuncionamento, tipoProduto, setor);
-                comercios.add(comercio);
-                Arquivo.escrever("C:\\GITHUB\\projeto_poo\\src\\comercios.txt", comercio.toString());
+
+    public static void main (String [] args){
+        Main main = new Main();
+        main.menuComercios();
+    }
+
+
+    public void mostraComercio(String dados){
+        JOptionPane.showMessageDialog(null,"COMÉRCIO\n-------\n +" +dados);
+    }
+
+    public void salvaComercio(ArrayList<Comercio> comercios){
+        ObjectOutputStream outputStream = null;
+        try {
+            outputStream = new ObjectOutputStream
+                    (new FileOutputStream("C:\\Users\\norto\\IdeaProjects\\projeto_poo\\src\\Comercios.txt"));
+            for (int i=0; i < comercios.size(); i++)
+                outputStream.writeObject(comercios.get(i));
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Impossível criar arquivo!");
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {  //Close the ObjectOutputStream
+            try {
+                if (outputStream != null) {
+                    outputStream.flush();
+                    outputStream.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        });
+        }
+    }
+
+    @SuppressWarnings("finally")
+    public ArrayList<Comercio> recuperaComercios(){
+        ArrayList<Comercio> comercios = new ArrayList<Comercio>();
+
+        ObjectInputStream inputStream = null;
+
+        try {
+            inputStream = new ObjectInputStream
+                    (new FileInputStream("C:\\Users\\norto\\IdeaProjects\\projeto_poo\\src\\Comercios.txt"));
+            Object obj = null;
+            while ((obj = inputStream.readObject()) != null) {
+                if (obj instanceof Comercio) {
+                    comercios.add((Comercio) obj);
+                }
+            }
+        } catch (EOFException ex) { // when EOF is reached
+            System.out.println("End of file reached.");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null,"Arquivo com produtos NÃO existe!");
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {  //Close the ObjectInputStream
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (final IOException ex) {
+                ex.printStackTrace();
+            }
+            return comercios;
+        }
+    }
+
+    public void menuComercios(){
+        ArrayList<Comercio> comercios = new ArrayList<>();
+
+        String menu = "";
+        String entrada;
+        int opc1, opc2;
+
+        do {
+            menu = "Entrada de Dados\n" +
+                    "Opções:\n" +
+                    "1. Entrar Comércios\n" +
+                    "2. Exibir Comércios\n" +
+                    "3. Limpar Comércios\n" +
+                    "4. Gravar Comércios\n" +
+                    "5. Recuperar Comércios\n" +
+                    "9. Sair";
+            entrada = JOptionPane.showInputDialog (menu + "\n\n");
+
+            while (!numeroInteiroValido(entrada)) {
+                entrada = JOptionPane.showInputDialog(null, menu +
+                        "\n\nEntrada inválida! Digite um número inteiro.");
+            }
+            opc1 = Integer.parseInt(entrada);
+
+            switch (opc1) {
+                case 1:// Entrar dados
+                    menu = "Entrada de Atletas\n" +
+                            "Opções:\n" +
+                            "1. Alimentício\n" +
+                            "2. Serviço\n" +
+                            "3. Fábrica\n";
+
+                    entrada = JOptionPane.showInputDialog (menu + "\n\n");
+                    while (!numeroInteiroValido(entrada)) {
+                        entrada = JOptionPane.showInputDialog(null, menu +
+                                "\n\nEntrada inválida! Digite um número inteiro.");
+                    }
+                    opc2 = Integer.parseInt(entrada);
+
+                    switch (opc2){
+                        case 1: comercios.add((Comercio)leComercio(opc2));
+                            break;
+                        case 2: comercios.add((Comercio) leComercio(opc2));
+                            break;
+                        case 3: comercios.add((Comercio) leComercio(opc2));
+                            break;
+                        default:
+                            JOptionPane.showMessageDialog(null,"Comércio para entrada NÃO escolhido!");
+                    }
+
+                    break;
+                case 2: // Exibir dados
+                    if (comercios.size() == 0) {
+                        JOptionPane.showMessageDialog(null,"Entre com comércios primeiramente");
+                        break;
+                    }
+                    String dados = "";
+                    for (int i=0; i < comercios.size(); i++)	{
+                        dados += comercios.get(i).toString() + "\n";
+                    }
+                    JOptionPane.showMessageDialog(null,dados);
+                    break;
+                case 3: // Limpar Dados
+                    if (comercios.size() == 0) {
+                        JOptionPane.showMessageDialog(null,"Entre com comércios primeiramente");
+                        break;
+                    }
+                    comercios.clear();
+                    JOptionPane.showMessageDialog(null,"Dados LIMPOS com sucesso!");
+                    break;
+                case 4: // Grava Dados
+                    if (comercios.size() == 0) {
+                        JOptionPane.showMessageDialog(null,"Entre com comércios primeiramente");
+                        break;
+                    }
+                    salvaComercio(comercios);
+                    JOptionPane.showMessageDialog(null,"Dados SALVOS com sucesso!");
+                    break;
+                case 5: // Recupera Dados
+                    comercios = recuperaComercios();
+                    if (comercios.size() == 0) {
+                        JOptionPane.showMessageDialog(null,"Sem dados para apresentar.");
+                        break;
+                    }
+                    JOptionPane.showMessageDialog(null,"Dados RECUPERADOS com sucesso!");
+                    break;
+                case 9:
+                    JOptionPane.showMessageDialog(null,"Fim do aplicativo Cadastro de Comércio");
+                    break;
+            }
+        } while (opc1 != 9);
+    }
+
+    public String[] leValores (String [] dadosIn){
+        String [] dadosOut = new String [dadosIn.length];
+
+        for (int i = 0; i < dadosIn.length; i++){
+            if(dadosIn[i] != null)
+                dadosOut[i] = JOptionPane.showInputDialog  ("Entre com " + dadosIn[i]+ ": ");
+            else
+                break;
+        }
+
+        return dadosOut;
+    }
+
+    public Object leComercio(int tipoComercio) {
+
+        String[] atributos = new String[6];
+        String[] nomeVal = new String[6];
+        nomeVal[0] = "Nome";
+        nomeVal[1] = "Endereço";
+        nomeVal[2] = "Telefone";
+        nomeVal[3] = "Horário de Funcionamento do Comércio";
+
+        if (tipoComercio == 1) {
+            nomeVal[4] = "Tipo de Comida";
+            atributos = leValores(nomeVal);
+            Alimenticio alimenticio = new Alimenticio(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4]);
+            return alimenticio;
+        } else if (tipoComercio == 2) {
+            nomeVal[4] = "Tipo de Serviço";
+            atributos = leValores(nomeVal);
+            Servico servico = new Servico(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4]);
+            return servico;
+        } else {
+            nomeVal[4] = "Tipo de Produto";
+            nomeVal[5] = "Setor";
+            atributos = leValores(nomeVal);
+            Fabrica fabrica = new Fabrica(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4], atributos[5]);
+            return fabrica;
+        }
+    }
+
+    private boolean numeroInteiroValido(String s) {
+        boolean resultado;
+        try {
+            Integer.parseInt(s);
+            resultado = true;
+        } catch (NumberFormatException e) {
+            resultado = false;
+        }
+        return resultado;
     }
 }

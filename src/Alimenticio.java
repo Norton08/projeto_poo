@@ -1,5 +1,7 @@
+import java.io.Serializable;
+
 public class Alimenticio extends Comercio
-                         implements IComercioRepository{
+                         implements Serializable {
 
     private static int contador = 0;
     private int codigo;
