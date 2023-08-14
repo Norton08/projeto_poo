@@ -5,16 +5,6 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main (String [] args){
-
-
-        Alimenticio alimenticio = new Alimenticio("MC Donald's", "Rua 1", "998877665", "0:00-23:59", "Hamburger");
-        Servico servico = new Servico("Pet Shop", "Rua 2", "987766554", "7:00-20:00", "Tosa e cuidado de pets");
-        Fabrica fabrica = new Fabrica("Mabel", "Rua 3", "986655443", "9:00-19:00", "Biscoitos&Panificados", "Industrial");
-        System.out.println(alimenticio);
-        System.out.println(servico);
-        System.out.println(fabrica);
-
-
         Main main = new Main();
         main.menuComercios();
     }
