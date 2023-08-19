@@ -56,9 +56,9 @@ public abstract class Comercio implements Serializable, IComercioRepository {
 
     @Override
     public Comercio consultar_porId(ArrayList<Comercio> comercios, int comercioId) {
-        for (Comercio pedido : comercios) {
-            if (pedido.getCodigo() == comercioId) {
-                return pedido;
+        for (Comercio comercio : comercios) {
+            if (comercio.getCodigo() == comercioId) {
+                return comercio;
             }
         }
         return null;

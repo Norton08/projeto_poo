@@ -36,7 +36,7 @@ public class Main {
 
     @SuppressWarnings("finally")
     public ArrayList<Comercio> recuperaComercios(){
-        ArrayList<Comercio> comercios = new ArrayList<>();
+        ArrayList<Comercio> comercios = new ArrayList<Comercio>();
 
         ObjectInputStream inputStream = null;
 
@@ -166,6 +166,22 @@ public class Main {
                     JOptionPane.showMessageDialog(null,"Dados RECUPERADOS com sucesso!");
                     break;
                 case 6: // Alterar Dados
+                    String comercioId2 = JOptionPane.showInputDialog ("Digite o Id de um Comércio que deseja consultar unicamente: ");
+
+                    while (!numeroInteiroValido(comercioId2)) {
+                        comercioId2 = JOptionPane.showInputDialog ("Digite o Id de um Comércio que deseja alterar os dados: " +
+                                "\n\nEntrada inválida! Digite um número inteiro.");
+                    }
+                    for (Comercio comercio : comercios) {
+                        Comercio c = comercio.consultar_porId(comercios, Integer.parseInt(comercioId2));
+                        c.setNome(JOptionPane.showInputDialog("Digite um novo nome para o comércio" + comercioId2));
+                        c.setEndereco(JOptionPane.showInputDialog("Digite um novo endereço para o comércio" + comercioId2));
+                        c.setTelefone(JOptionPane.showInputDialog("Digite um novo telefone para o comércio" + comercioId2));
+                        c.setHorarioFuncionamento(JOptionPane.showInputDialog("Digite um novo horário de funcionamento para o comércio" + comercioId2));
+                        JOptionPane.showMessageDialog(null, c);
+                        break;
+                    }
+
                     break;
                 case 7: // Consultar Um dado por id Dados
                     String comercioId = JOptionPane.showInputDialog ("Digite o Id de um Comércio que deseja consultar unicamente: ");

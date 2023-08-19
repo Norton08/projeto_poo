@@ -1,1 +1,0 @@
-typeSearchIndex = [{"p":"<Unnamed>","l":"Alimenticio"},{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"<Unnamed>","l":"Arquivo"},{"p":"<Unnamed>","l":"Comercio"},{"p":"<Unnamed>","l":"Fabrica"},{"p":"<Unnamed>","l":"IComercioRepository"},{"p":"<Unnamed>","l":"Main"},{"p":"<Unnamed>","l":"Servico"}];updateSearchResults();
