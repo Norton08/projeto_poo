@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Servico extends Comercio{
     private String tipoServico;
 
@@ -19,11 +21,11 @@ public class Servico extends Comercio{
         return "--------------------------" +
                     "Tipo: Serviço"  +
                 "--------------------------\n" +
-                "Código: " + this.getCodigo() + "\n" +
-                "Nome: " + this.getNome() +  "\n" +
-                "Endereço: " + this.getEndereco() + "\n" +
-                "Telefone: " + this.getTelefone() + "\n" +
-                "Horário de Funcionamento: " + this.getHorarioFuncionamento() + "\n" +
-                "Tipo de Produto: " + this.tipoServico;
+                "Código: " + getCodigo() + "\n" +
+                "Nome: " + getNome() +  "\n" +
+                "Endereço: " + getEndereco() + "\n" +
+                "Telefone: " + getTelefone() + "\n" +
+                "Horário de Funcionamento: " + getHorarioFuncionamento() + "\n" +
+                "Tipo de Produto: " + getTipoServico();
     }
 }

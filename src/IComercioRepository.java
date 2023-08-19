@@ -1,6 +1,5 @@
+import java.util.ArrayList;
+
 public interface IComercioRepository {
-    public void criar(Comercio comercio);
-    public void ler();
-    public void atualizar(Comercio comercio);
-    public void excluir(Comercio comercio);
+    Comercio consultar_porId(ArrayList<Comercio> comercios, int comercioId);
 }

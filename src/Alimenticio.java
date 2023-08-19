@@ -1,5 +1,6 @@
+import java.util.ArrayList;
 
-public class Alimenticio extends Comercio {
+public class Alimenticio extends Comercio  {
     private String tipoComida;
 
     public Alimenticio(String nome, String endereco, String telefone, String horarioFuncionamento, String tipoComida) {
@@ -19,11 +20,11 @@ public class Alimenticio extends Comercio {
         return "--------------------------" +
                     "Tipo: Alimentício"  +
                 "--------------------------\n" +
-                "Código: " + this.getCodigo() + "\n" +
-                "Nome: " + this.getNome() +  "\n" +
-                "Endereço: " + this.getEndereco() + "\n" +
-                "Telefone: " + this.getTelefone() + "\n" +
-                "Horário de Funcionamento: " + this.getHorarioFuncionamento() + "\n" +
-                "Tipo de Produto: " + this.tipoComida + "\n";
+                "Código: " + getCodigo() + "\n" +
+                "Nome: " + getNome() +  "\n" +
+                "Endereço: " + getEndereco() + "\n" +
+                "Telefone: " + getTelefone() + "\n" +
+                "Horário de Funcionamento: " + getHorarioFuncionamento() + "\n" +
+                "Tipo de Produto: " + getTipoComida() + "\n";
     }
 }

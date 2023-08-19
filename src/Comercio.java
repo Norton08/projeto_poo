@@ -1,6 +1,7 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
-public abstract class Comercio implements Serializable {
+public abstract class Comercio implements Serializable, IComercioRepository {
 
     private static int contador = 0;
     private int codigo;
@@ -51,6 +52,16 @@ public abstract class Comercio implements Serializable {
 
     public void setHorarioFuncionamento(String horarioFuncionamento) {
         this.horarioFuncionamento = horarioFuncionamento;
+    }
+
+    @Override
+    public Comercio consultar_porId(ArrayList<Comercio> comercios, int comercioId) {
+        for (Comercio pedido : comercios) {
+            if (pedido.getCodigo() == comercioId) {
+                return pedido;
+            }
+        }
+        return null;
     }
 
 }

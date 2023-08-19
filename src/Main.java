@@ -36,7 +36,7 @@ public class Main {
 
     @SuppressWarnings("finally")
     public ArrayList<Comercio> recuperaComercios(){
-        ArrayList<Comercio> comercios = new ArrayList<Comercio>();
+        ArrayList<Comercio> comercios = new ArrayList<>();
 
         ObjectInputStream inputStream = null;
 
@@ -104,7 +104,7 @@ public class Main {
 
             switch (opc1) {
                 case 1:// Entrar dados
-                    menu = "Entrada de Atletas\n" +
+                    menu = "Entrada de Comércios\n" +
                             "Opções:\n" +
                             "1. Alimentício\n" +
                             "2. Serviço\n" +
@@ -118,7 +118,7 @@ public class Main {
                     opc2 = Integer.parseInt(entrada);
 
                     switch (opc2){
-                        case 1: comercios.add((Comercio) leComercio(opc2));
+                        case 1: comercios.add((Comercio)leComercio(opc2));
                             break;
                         case 2: comercios.add((Comercio) leComercio(opc2));
                             break;
@@ -134,11 +134,11 @@ public class Main {
                         JOptionPane.showMessageDialog(null,"Entre com comércios primeiramente");
                         break;
                     }
-                    String dados = "";
-                    for (int i=0; i < comercios.size(); i++) {
-                        dados += comercios.get(i).toString() + "\n";
+                    StringBuilder dados = new StringBuilder();
+                    for (Comercio value : comercios) {
+                        dados.append(value.toString()).append("\n");
                     }
-                    JOptionPane.showMessageDialog(null,dados);
+                    JOptionPane.showMessageDialog(null, dados.toString());
                     break;
                 case 3: // Limpar Dados
                     if (comercios.size() == 0) {
@@ -164,6 +164,21 @@ public class Main {
                         break;
                     }
                     JOptionPane.showMessageDialog(null,"Dados RECUPERADOS com sucesso!");
+                    break;
+                case 6: // Alterar Dados
+                    break;
+                case 7: // Consultar Um dado por id Dados
+                    String comercioId = JOptionPane.showInputDialog ("Digite o Id de um Comércio que deseja consultar unicamente: ");
+
+                    while (!numeroInteiroValido(comercioId)) {
+                        comercioId = JOptionPane.showInputDialog ("Digite o Id de um Comércio que deseja consultar unicamente: " +
+                                                                                  "\n\nEntrada inválida! Digite um número inteiro.");
+                    }
+                    for (Comercio comercio : comercios) {
+                        Comercio c = comercio.consultar_porId(comercios, Integer.parseInt(comercioId));
+                        JOptionPane.showMessageDialog(null, c);
+                        break;
+                    }
                     break;
                 case 9:
                     JOptionPane.showMessageDialog(null,"Fim do aplicativo Cadastro de Comércio");
@@ -197,19 +212,16 @@ public class Main {
         if (tipoComercio == 1) {
             nomeVal[4] = "Tipo de Comida";
             atributos = leValores(nomeVal);
-            Alimenticio alimenticio = new Alimenticio(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4]);
-            return alimenticio;
+            return new Alimenticio(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4]);
         } else if (tipoComercio == 2) {
             nomeVal[4] = "Tipo de Serviço";
             atributos = leValores(nomeVal);
-            Servico servico = new Servico(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4]);
-            return servico;
+            return new Servico(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4]);
         } else {
             nomeVal[4] = "Tipo de Produto";
             nomeVal[5] = "Setor";
             atributos = leValores(nomeVal);
-            Fabrica fabrica = new Fabrica(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4], atributos[5]);
-            return fabrica;
+            return new Fabrica(atributos[0], atributos[1], atributos[2], atributos[3], atributos[4], atributos[5]);
         }
     }
 
